@@ -1,0 +1,29 @@
+
+$main-hue: 80;
+$lightness-values: (
+    1: 10, 2: 20, 3: 30, 4: 40, 5: 50, 6: 60, 7: 70, 8: 80, 9: 90, 10: 100,
+    default: 55, upper-ground:  75 
+);
+$saturation-values: ( 1: 10, 2: 20, 3: 30, 4: 40, 5: 50, 6: 60, 7: 70, 8: 80, 9: 90, 10: 100,
+light: 97, dark: 0, slight-colored: 23);
+
+@function getCC($saturation, $lightness, $opacity: 1) {
+    @return hsla($main-hue, map-get($map: $saturation-values, $key: $saturation) * 1%, map-get($map: $lightness-values, $key: $lightness) * 1%, $opacity);
+}
+
+
+
+@mixin flexCenter($direction, $space: space-evenly) {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: $direction;
+    justify-content: $space;
+}
+
+@mixin defualtBox($direction, $space: space-evenly , $lightness: 4, $lightness_2: -1, $opacity: 1) {
+    @include flexCenter($direction, $space);
+    background-color: getCC(5, $lightness, $opacity);
+    border: 0.75em solid getCC(5, $lightness + $lightness_2, $opacity);
+    
+}
